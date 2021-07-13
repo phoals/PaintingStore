@@ -1,0 +1,35 @@
+﻿@page "{id}"
+@model PaintingStore.Pages.Paintings.DetailsModel
+@{
+    ViewData["Title"] = "Painting Details";
+    var photoPath = $"/images/{Model.painting.Photopath ?? "noimage.png"}";
+}
+
+<div class="row m-3 justify-content-center">
+    <div class="col col-lg-12 text-center p-5">
+        <h1>@Model.painting.Name</h1>
+        <h2 class="text-secondary"><ins>By @Model.painting.Author</ins></h2>
+    </div>
+    <div class="col col-lg-12">
+        <img class="card-img-top m-3" src=@photoPath asp-append-version="true" />
+    </div>
+    <div class="col col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h2><strong>Genre:</strong> @Model.painting.Genre</h2>
+            </div>
+
+            <div class="card-body">
+                <h2><strong>Description:</strong>(will be soon)</h2>
+            </div>
+
+            <div class="card-footer">
+                <h2 class="text-success"><strong class="text-dark">Price:</strong> @Model.painting.Cost $</h2>
+            </div>
+        </div>
+    </div>
+    <div class="m-4">
+        <a class="btn btn-lg btn-dark" asp-page="Basket">Add</a>
+        <a class="btn btn-lg btn-dark" asp-page="Paintings">Back</a>
+    </div>
+</div>

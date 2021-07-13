@@ -1,0 +1,32 @@
+﻿@page
+@model PaintingStore.Pages.Paintings.PaintingsModel
+@{
+    ViewData["Title"] = "Paintings";
+}
+
+<div class="row">
+    @foreach (var item in Model.Paintings)
+    {
+        var photoPath = $"/images/{item.Photopath ?? "noimage.png"}";
+
+        <div class="col-4 col-lg-4 col-sm-1">
+            <div class="card-deck">
+                <div class="card m-3">
+                    <div class="card-header text-center">
+                        <h3>@item.Name</h3>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <img class="card-img-top" src=@photoPath asp-append-version="true" />
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <a class="btn btn-dark m-1" asp-route-ID="@item.Id" asp-page="/Paintings/Details">View</a>
+                        @*<a class="btn btn-dark m-1" href="#">Edit</a>
+                        <a class="btn btn-dark m-1" href="#">Delete</a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
