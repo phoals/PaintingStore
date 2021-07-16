@@ -11,7 +11,7 @@
         <h2 class="text-secondary"><ins>By @Model.painting.Author</ins></h2>
     </div>
     <div class="col col-lg-12">
-        <img class="card-img-top m-3" src=@photoPath asp-append-version="true" />
+        <img class="card-img-top p-3" src=@photoPath asp-append-version="true" />
     </div>
     <div class="col col-lg-12">
         <div class="card">
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="m-4">
-        <a class="btn btn-lg btn-dark" asp-page="Basket">Add</a>
+        <a class="btn btn-lg btn-dark" asp-page="Basket" asp-route-Id="@Model.painting.Id">Add</a>
         <a class="btn btn-lg btn-dark" asp-page="Paintings">Back</a>
     </div>
 </div>

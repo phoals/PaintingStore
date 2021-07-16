@@ -1,0 +1,84 @@
+﻿@page "{id}"
+@using PaintingStore.Models;
+@using PaintingStore.Services;
+@model PaintingStore.Pages.Paintings.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<form method="post" class="mt-3">
+    <!--Создаём скрытое поле для параметра ID-->
+    <input type="hidden" asp-for="Painting.Id" />
+
+    <!--Добавляем поля редактирования-->
+    <div class="row justify-content-center m-3">
+        <div class="col col-lg-8">
+            <div class="card">
+                <div class="card-header text-center">
+                    <!--Добавляем поле редактирования имени-->
+                    <div class="form-group row">
+                        <label asp-for="Painting.Name" class="col col-lg-4 col-form-label text-right">Edit Name:</label>
+                        <div class="col col-lg-6">
+                            <input asp-for="Painting.Name" class="form-control" placeholder="@Model.Painting.Name" />
+                            <!--Добавляем сообщение валидации формы-->
+                            <span asp-validation-for="Painting.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body text-center">
+                    <div class="row">
+                        <div class="col col-lg-9">
+                            <h4>Painting ID: @Model.Painting.Id</h4><hr />
+
+                            <!--Добавляем поле редактирования автора-->
+                            <div class="form-group row">
+                                <label asp-for="Painting.Author" class="col col-lg-4 col-form-label text-right">Edit Author:</label>
+                                <div class="col-12 col-lg-6">
+                                    <input asp-for="Painting.Author" class="form-control mr-2" placeholder="@Model.Painting.Author" />
+                                    <!--Добавляем сообщение валидации формы-->
+                                    <span asp-validation-for="Painting.Author" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr />
+
+                            <!--Добавляем поле редактирования цены-->
+                            <div class="form-group row">
+                                <label asp-for="Painting.Cost" class="col col-lg-4 col-form-label text-right">Edit Price:</label>
+                                <div class="col-12 col-lg-6">
+                                    <input asp-for="Painting.Cost" class="form-control mr-2" placeholder="@Model.Painting.Cost" />
+                                    <!--Добавляем сообщение валидации формы-->
+                                    <span asp-validation-for="Painting.Cost" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr />
+
+                            <!--Добавляем поле редактирования жанра-->
+                            <div class="form-group row">
+                                <label asp-for="Painting.Genre" class="col col-lg-4 col-form-label text-right">Edit Genre:</label>
+                                <div class="col-12 col-lg-6">
+                                    <!--Создаём выпадающий список с департаментами-->
+                                    <select asp-for="Painting.Genre" class="custom-select mr-2" asp-items="Html.GetEnumSelectList<Genre>()">
+                                        <!--Добавляем начальный элемент выпадающего списка-->
+                                        <option value="">Please Select</option>
+                                    </select>
+                                    <span asp-validation-for="Painting.Genre" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card-footer text-center" style="background-color: rgba(0, 0, 0, 0.25);">
+                                <button type="submit" class="btn btn-success">Update</button>
+                                <a asp-page="index" class="btn btn-danger">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

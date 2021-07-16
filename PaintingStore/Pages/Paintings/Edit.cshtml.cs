@@ -4,21 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PaintingStore.Services;
 using PaintingStore.Models;
+using PaintingStore.Services;
+using Microsoft.Net.Http;
 
 namespace PaintingStore.Pages.Paintings
 {
-    public class DetailsModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly IPaintingRepository _paintingRepository;
 
-        public DetailsModel(IPaintingRepository paintingRepository)
+        public Painting Painting { get; set; }
+
+        public EditModel(IPaintingRepository paintingRepository)
         {
             _paintingRepository = paintingRepository;
         }
-
-        public Painting Painting { get; private set; }
 
         public IActionResult OnGet(int id)
         {
@@ -30,6 +31,13 @@ namespace PaintingStore.Pages.Paintings
             }
 
             return Page();
+        }
+
+        public IActionResult OnPost(Painting painting)
+        {
+            Painting = _paintingRepository.Update(painting);
+
+            return RedirectToPage("Paintings");
         }
     }
 }

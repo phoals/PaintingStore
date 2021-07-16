@@ -40,6 +40,7 @@ namespace PaintingStore.Services
                 }
             };
         }
+
         public IEnumerable<Painting> GetAllPaintings()
         {
             return _paintingList;
@@ -48,6 +49,21 @@ namespace PaintingStore.Services
         public Painting GetPainting(int id)
         {
             return _paintingList.FirstOrDefault(x => x.Id == id);
+        }
+
+        public Painting Update(Painting updatedPainting)
+        {
+            Painting painting = _paintingList.FirstOrDefault(x => x.Id == updatedPainting.Id);
+
+            if (painting != null)
+            {
+                painting.Name = updatedPainting.Name;
+                painting.Author = updatedPainting.Author;
+                painting.Cost = updatedPainting.Cost;
+                painting.Genre = updatedPainting.Genre;
+            }
+
+            return painting;
         }
     }
 }

@@ -22,8 +22,8 @@
 
                     <div class="card-footer text-center">
                         <a class="btn btn-dark m-1" asp-route-ID="@item.Id" asp-page="/Paintings/Details">View</a>
-                        @*<a class="btn btn-dark m-1" href="#">Edit</a>
-                        <a class="btn btn-dark m-1" href="#">Delete</a>*@
+                        <a class="btn btn-dark m-1" asp-route-ID="@item.Id" asp-page="/Paintings/Edit">Edit</a>
+                        <a class="btn btn-dark m-1" href="#">Delete</a>
                     </div>
                 </div>
             </div>

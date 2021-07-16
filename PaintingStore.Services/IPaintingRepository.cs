@@ -10,5 +10,7 @@ namespace PaintingStore.Services
         IEnumerable<Painting> GetAllPaintings();
 
         Painting GetPainting(int id);
+
+        Painting Update(Painting updatedPainting);
     }
 }
