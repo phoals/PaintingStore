@@ -18,13 +18,13 @@ namespace PaintingStore.Pages.Paintings
             _paintingRepository = paintingRepository;
         }
 
-        public Painting Painting { get; private set; }
+        public Painting painting { get; private set; }
 
         public IActionResult OnGet(int id)
         {
-            Painting = _paintingRepository.GetPainting(id);
+            painting = _paintingRepository.GetPainting(id);
 
-            if (Painting == null)
+            if (painting == null)
             {
                 return RedirectToPage("/NotFound");
             }

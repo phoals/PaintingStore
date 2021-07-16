@@ -29,7 +29,8 @@
         </div>
     </div>
     <div class="m-4">
-        <a class="btn btn-lg btn-dark" asp-page="Basket" asp-route-Id="@Model.painting.Id">Add</a>
-        <a class="btn btn-lg btn-dark" asp-page="Paintings">Back</a>
+        <a class="btn btn-lg btn-dark m-1" asp-page="Basket" asp-route-Id="@Model.painting.Id">Add</a>
+        <a class="btn btn-lg btn-dark m-1" asp-route-ID="@Model.painting.Id" asp-page="/Paintings/Edit">Edit</a>
+        <a class="btn btn-lg btn-dark m-1" asp-page="Paintings">Back</a>
     </div>
 </div>
