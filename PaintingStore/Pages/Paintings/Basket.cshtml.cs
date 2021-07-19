@@ -11,22 +11,20 @@ namespace PaintingStore.Pages.Paintings
 {
     public class BasketModel : PageModel
     {
-        private readonly IPaintingRepository _paintingRepository;
-
+        private readonly IBasketRepository _basketRepository;
         public List<Painting> paintingsInBasket;
+        public int quantity;
 
-        public BasketModel(IPaintingRepository paintingRepository)
+        public BasketModel(IBasketRepository basketRepository)
         {
-            _paintingRepository = paintingRepository;
-            paintingsInBasket = new List<Painting>();
+            _basketRepository = basketRepository;
         }
-
-        public Painting Painting { get; set; }
 
         public IActionResult OnGet(int id)
         {
-            Painting = _paintingRepository.GetPainting(id);
-            this.paintingsInBasket.Add(Painting);
+
+            paintingsInBasket = _basketRepository.AddToBasket(id);
+            quantity = paintingsInBasket.Count();
 
             return Page();
         }

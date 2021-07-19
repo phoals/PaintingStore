@@ -61,6 +61,7 @@ namespace PaintingStore.Services
                 painting.Author = updatedPainting.Author;
                 painting.Cost = updatedPainting.Cost;
                 painting.Genre = updatedPainting.Genre;
+                painting.Photopath = updatedPainting.Photopath;
             }
 
             return painting;

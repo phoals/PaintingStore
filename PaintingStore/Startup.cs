@@ -27,6 +27,7 @@ namespace PaintingStore
         {
             services.AddRazorPages();
             services.AddSingleton<IPaintingRepository, MockPaintingRepository>();
+            services.AddSingleton<IBasketRepository, MockBasketRepository>();
 
             services.Configure<RouteOptions>(options =>
             {
