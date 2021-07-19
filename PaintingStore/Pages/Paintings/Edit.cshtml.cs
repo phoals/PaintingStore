@@ -45,12 +45,6 @@ namespace PaintingStore.Pages.Paintings
         {
             if (Photo != null)
             {
-                if (painting.Photopath != null)
-                {
-                    string filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", painting.Photopath);
-                    System.IO.File.Delete(filePath);
-                }
-
                 painting.Photopath = ProcessUploadedFile();
             }
 
