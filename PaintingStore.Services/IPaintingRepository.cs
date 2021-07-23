@@ -12,5 +12,7 @@ namespace PaintingStore.Services
         Painting GetPainting(int id);
 
         Painting Update(Painting updatedPainting);
+
+        Painting Add(Painting newPainting);
     }
 }

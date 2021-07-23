@@ -20,11 +20,17 @@ namespace PaintingStore.Pages.Paintings
             _basketRepository = basketRepository;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int? id)
         {
-
-            paintingsInBasket = _basketRepository.AddToBasket(id);
-            quantity = paintingsInBasket.Count();
+            if (id.HasValue)
+            {
+                paintingsInBasket = _basketRepository.AddToBasket(id.Value);
+                quantity = paintingsInBasket.Count();
+            }
+            else
+            {
+                paintingsInBasket = _basketRepository.GetAllBasket();
+            }
 
             return Page();
         }

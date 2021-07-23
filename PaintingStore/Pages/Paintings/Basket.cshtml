@@ -1,16 +1,45 @@
 ﻿@page
 @model PaintingStore.Pages.Paintings.BasketModel
 @{
+    int sumPrice = 0;
 }
 
-<div>
-    @if (Model.paintingsInBasket != null)
-    {
-        foreach (var item in Model.paintingsInBasket)
-        {
-            <div>
-                <h1>@item.Name</h1>
-            </div>
-        }
-    }
+<div class="card-deck">
+
+    <div class="card-body">
+        <div class="row">
+            @if (Model.paintingsInBasket != null)
+            {
+                foreach (var item in Model.paintingsInBasket)
+                {
+                    sumPrice += item.Cost;
+                    var photoPath = $"/images/{item.Photopath ?? "noimage.png"}";
+
+                    <div class="col-3 col-lg-3 col-sm-1">
+                        <div class="card-deck">
+                            <div class="card m-3">
+                                <div class="card-header text-center">
+                                    <h3>@item.Name</h3>
+                                </div>
+
+                                <div class="card-body text-center">
+                                    <img class="card-img-top" src=@photoPath asp-append-version="true" />
+                                </div>
+
+                                <div class="card-footer">
+                                    <h2 class="text-success"><strong class="text-dark">Price:</strong> @item.Cost $</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="card-footer">
+        <h2>@sumPrice $</h2>
+    </div>
+
 </div>
+

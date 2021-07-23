@@ -7,7 +7,7 @@ namespace PaintingStore.Services
 {
     public interface IBasketRepository
     {
-        IEnumerable<Painting> GetAllBasket();
+        List<Painting> GetAllBasket();
 
         List<Painting> AddToBasket(int id);
     }

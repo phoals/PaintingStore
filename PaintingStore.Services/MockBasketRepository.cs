@@ -15,7 +15,7 @@ namespace PaintingStore.Services
             _paintingRepository = paintingRepository;
             _paintingsBasket = new List<Painting>();
         }
-        public IEnumerable<Painting> GetAllBasket()
+        public List<Painting> GetAllBasket()
         {
             return _paintingsBasket;
         }

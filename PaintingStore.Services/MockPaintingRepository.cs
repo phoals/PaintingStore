@@ -41,6 +41,14 @@ namespace PaintingStore.Services
             };
         }
 
+        public Painting Add(Painting newPainting)
+        {
+            newPainting.Id = _paintingList.Max(x => x.Id) + 1;
+            _paintingList.Add(newPainting);
+
+            return newPainting;
+        }
+
         public IEnumerable<Painting> GetAllPaintings()
         {
             return _paintingList;

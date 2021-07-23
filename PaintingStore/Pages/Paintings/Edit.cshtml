@@ -1,10 +1,12 @@
-﻿@page "{id}"
+﻿@page "{id?}/{handler?}"
 @using PaintingStore.Models;
 @using PaintingStore.Services;
 @model PaintingStore.Pages.Paintings.EditModel
 @{
-    ViewData["Title"] = "Edit";
     var photoPath = $"/images/{Model.Painting.Photopath ?? "noimage.png"}";
+
+    var pageTitle = Model.Painting.Id > Model.Paintings.Max(x => x.Id) ? "Create" : "Edit";
+    ViewData["Title"] = pageTitle;
 }
 
 <form method="post" class="mt-3" enctype="multipart/form-data">

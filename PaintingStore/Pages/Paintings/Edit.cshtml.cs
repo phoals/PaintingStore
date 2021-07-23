@@ -19,19 +19,36 @@ namespace PaintingStore.Pages.Paintings
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         [BindProperty]
+        public int MaxPaintingId { get; set; }
+
+        [BindProperty]
         public IFormFile Photo { get; set; }
 
+        [BindProperty]
         public Painting Painting { get; set; }
+
+        [BindProperty]
+        public IEnumerable<Painting> Paintings { get; set; }
 
         public EditModel(IPaintingRepository paintingRepository, IWebHostEnvironment webHostEnvironment)
         {
             _paintingRepository = paintingRepository;
             _webHostEnvironment = webHostEnvironment;
+            Paintings = _paintingRepository.GetAllPaintings();
+            MaxPaintingId = Paintings.Max(x => x.Id);
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int? id)
         {
-            Painting = _paintingRepository.GetPainting(id);
+            if (id.HasValue)
+            {
+                Painting = _paintingRepository.GetPainting(id.Value);
+            }
+            else
+            {
+                Painting = new Painting();
+                Painting.Id = MaxPaintingId + 1;
+            }
 
             if (Painting == null)
             {
@@ -41,16 +58,28 @@ namespace PaintingStore.Pages.Paintings
             return Page();
         }
 
-        public IActionResult OnPost(Painting painting)
+        public IActionResult OnPost()
         {
-            if (Photo != null)
+            if (ModelState.IsValid)
             {
-                painting.Photopath = ProcessUploadedFile();
+                if (Photo != null)
+                {
+                    Painting.Photopath = ProcessUploadedFile();
+                }
+
+                if (Painting.Id > MaxPaintingId)
+                {
+                    Painting = _paintingRepository.Add(Painting);
+                }
+                else
+                {
+                    Painting = _paintingRepository.Update(Painting);
+                }
+
+                return RedirectToPage("Paintings");
             }
 
-            Painting = _paintingRepository.Update(painting);
-
-            return RedirectToPage("Paintings");
+                return Page();
         }
 
         private string ProcessUploadedFile()
