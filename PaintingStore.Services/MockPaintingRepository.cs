@@ -49,6 +49,18 @@ namespace PaintingStore.Services
             return newPainting;
         }
 
+        public Painting Delete(int id)
+        {
+            Painting paintingToDelete = _paintingList.FirstOrDefault(x => x.Id == id);
+
+            if (paintingToDelete != null)
+            {
+                _paintingList.Remove(paintingToDelete);
+            }
+
+            return paintingToDelete;
+        }
+
         public IEnumerable<Painting> GetAllPaintings()
         {
             return _paintingList;
