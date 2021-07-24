@@ -4,14 +4,14 @@
     ViewData["Title"] = "Paintings";
 }
 
-@*<form class="mb-3" method="get">
+<form class="mb-3" method="get">
     <div class="input-group">
         <input class="form-control" asp-for="SearchTerm"/>
         <div class="input-group-append">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-outline-dark">Search</button>
         </div>
     </div>
-</form>*@
+</form>
 
 <div class="row">
     @foreach (var item in Model.Paintings)

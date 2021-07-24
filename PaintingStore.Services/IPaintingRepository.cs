@@ -7,6 +7,8 @@ namespace PaintingStore.Services
 {
     public interface IPaintingRepository
     {
+        IEnumerable<Painting> Search(string searchTerm);
+
         IEnumerable<Painting> GetAllPaintings();
 
         Painting GetPainting(int id);

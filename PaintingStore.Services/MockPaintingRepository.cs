@@ -79,7 +79,17 @@ namespace PaintingStore.Services
                                     Genre = x.Key.Value,
                                     Count = x.Count()
                                 }).ToList();
-        }   
+        }
+
+        public IEnumerable<Painting> Search(string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                return _paintingList;
+            }
+
+            return _paintingList.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower()) || x.Author.ToLower().Contains(searchTerm.ToLower()));
+        }
 
         public Painting Update(Painting updatedPainting)
         {
