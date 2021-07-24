@@ -16,5 +16,7 @@ namespace PaintingStore.Services
         Painting Add(Painting newPainting);
 
         Painting Delete(int id);
+
+        IEnumerable<GenrePaintingCount> PaintingCountByGenre();
     }
 }

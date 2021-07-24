@@ -71,6 +71,16 @@ namespace PaintingStore.Services
             return _paintingList.FirstOrDefault(x => x.Id == id);
         }
 
+        public IEnumerable<GenrePaintingCount> PaintingCountByGenre()
+        {
+            return _paintingList.GroupBy(x => x.Genre)
+                                .Select(x => new GenrePaintingCount()
+                                {
+                                    Genre = x.Key.Value,
+                                    Count = x.Count()
+                                }).ToList();
+        }   
+
         public Painting Update(Painting updatedPainting)
         {
             Painting painting = _paintingList.FirstOrDefault(x => x.Id == updatedPainting.Id);

@@ -1,0 +1,10 @@
+﻿@page
+@model PaintingStore.Pages.Paintings.StatsModel
+@{
+}
+
+<div class="row m-3 justify-content-center">
+    <div class="col col-lg-8">
+        @await Component.InvokeAsync("PaintCount")
+    </div>
+</div>
