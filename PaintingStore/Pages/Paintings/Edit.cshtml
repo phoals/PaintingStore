@@ -4,8 +4,13 @@
 @model PaintingStore.Pages.Paintings.EditModel
 @{
     var photoPath = $"/images/{Model.Painting.Photopath ?? "noimage.png"}";
+    var pageTitle = "Create";
 
-    var pageTitle = Model.Painting.Id > Model.Paintings.Max(x => x.Id) ? "Create" : "Edit";
+    if (Model.Paintings.Count() > 0)
+    {
+        pageTitle = Model.NewPaintingId > Model.MaxPaintingId ? "Create" : "Edit";
+    }
+
     ViewData["Title"] = pageTitle;
 }
 

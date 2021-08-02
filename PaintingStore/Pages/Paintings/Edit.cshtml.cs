@@ -22,6 +22,9 @@ namespace PaintingStore.Pages.Paintings
         public int MaxPaintingId { get; set; }
 
         [BindProperty]
+        public int NewPaintingId { get; set; }
+
+        [BindProperty]
         public IFormFile Photo { get; set; }
 
         [BindProperty]
@@ -35,7 +38,14 @@ namespace PaintingStore.Pages.Paintings
             _paintingRepository = paintingRepository;
             _webHostEnvironment = webHostEnvironment;
             Paintings = _paintingRepository.GetAllPaintings();
-            MaxPaintingId = Paintings.Max(x => x.Id);
+            if (Paintings.Count() > 0)
+            {
+                MaxPaintingId = Paintings.Max(x => x.Id);
+            }
+            else
+            {
+                MaxPaintingId = 0;
+            }
         }
 
         public IActionResult OnGet(int? id)
@@ -47,7 +57,7 @@ namespace PaintingStore.Pages.Paintings
             else
             {
                 Painting = new Painting();
-                Painting.Id = MaxPaintingId + 1;
+                NewPaintingId = MaxPaintingId + 1;
             }
 
             if (Painting == null)
@@ -67,7 +77,7 @@ namespace PaintingStore.Pages.Paintings
                     Painting.Photopath = ProcessUploadedFile();
                 }
 
-                if (Painting.Id > MaxPaintingId)
+                if (NewPaintingId > MaxPaintingId)
                 {
                     Painting = _paintingRepository.Add(Painting);
                 }

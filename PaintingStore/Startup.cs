@@ -1,15 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using PaintingStore.Services;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 
 namespace PaintingStore
 {
@@ -25,9 +21,16 @@ namespace PaintingStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContextPool<AppDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("PaintingDBConnection"));
+            });
+
             services.AddRazorPages();
-            services.AddSingleton<IPaintingRepository, MockPaintingRepository>();
-            services.AddSingleton<IBasketRepository, MockBasketRepository>();
+            //services.AddSingleton<IPaintingRepository, MockPaintingRepository>();
+            services.AddScoped<IPaintingRepository, SQLPaintingRepository>();
+            //services.AddSingleton<IBasketRepository, MockBasketRepository>();
+            services.AddScoped<IBasketRepository, SQLBasketRepository>();
 
             services.Configure<RouteOptions>(options =>
             {
